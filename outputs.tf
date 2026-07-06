@@ -27,3 +27,8 @@ output "website_url" {
   description = "Website URL for the Apache web server"
   value       = "http://${aws_instance.web_server.public_ip}"
 }
+
+output "backup_bucket_name" {
+  description = "Name of the S3 backup bucket"
+  value       = aws_s3_bucket.backup_bucket.bucket
+}
