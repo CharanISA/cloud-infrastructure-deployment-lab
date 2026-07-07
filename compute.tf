@@ -21,12 +21,22 @@ resource "aws_instance" "web_server" {
                 dnf install -y httpd
                 systemctl enable httpd
                 systemctl start httpd
-                echo "<h1>Cloud Infrastructure Deployment Lab</h1><p>Provisioned with Terraform. Hosted on AWS EC2. Built by Charan.</p>" > /var/www/html/index.html
+                
+                cat > /var/www/html/index.html <<'HTML'
+                ${file("${path.module}/website/index.html")}
+                HTML
+
+                cat > /var/www/html/style.css <<'CSS'
+                ${file("${path.module}/website/style.css")}
+                CSS
+
+                cat > /var/www/html/script.js <<'JS'
+                ${file("${path.module}/website/script.js")}
+                JS
                 EOF
 
   tags = {
     Name    = "${var.project_name}-web-server"
     Project = var.project_name
   }
-
 }
