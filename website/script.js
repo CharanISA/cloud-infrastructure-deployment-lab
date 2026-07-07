@@ -1,0 +1,1 @@
+console.log("Cloud Infrastructure Deployment Lab loaded successfully");
